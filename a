@@ -1,0 +1,37 @@
+#!/bin/sh
+
+COMMAND=$1
+ARGS=`printf " %q" "${@:2}"`
+
+# git commands
+cmdmap_add="git"
+cmdmap_commit="git"
+cmdmap_diff="git"
+cmdmap_pull="git"
+cmdmap_push="git"
+cmdmap_rebase="git"
+cmdmap_status="git"
+
+# vagrant commands
+cmdmap_halt="vagrant"
+cmdmap_up="vagrant"
+cmdmap_reload="vagrant"
+
+
+# echo command: $COMMAND
+# echo arguments: $ARGS
+
+CMDLOOKUP=cmdmap_$COMMAND
+# echo "CMDLOOKUP: $CMDLOOKUP"
+MAPPED=${!CMDLOOKUP}
+# echo "MAPPED: $MAPPED"
+if [ "$MAPPED" == "" ]
+then
+	echo "No mapped executable found for $COMMAND."
+	exit 1
+fi
+
+# echo "Mapped exec: $MAPPED"
+EXEC=`echo "$MAPPED $COMMAND $ARGS"`
+echo Executing: $EXEC
+bash -c "$EXEC"
