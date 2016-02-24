@@ -16,7 +16,7 @@ cmdmap_status="git"
 cmdmap_halt="vagrant"
 cmdmap_up="vagrant"
 cmdmap_reload="vagrant"
-
+cmdmap_ssh="vagrant"
 
 # echo command: $COMMAND
 # echo arguments: $ARGS
